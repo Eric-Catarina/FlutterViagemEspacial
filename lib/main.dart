@@ -54,17 +54,27 @@ class ListaDeTarefas extends StatelessWidget{
   }
 }
 
-class ItemDaLista extends StatelessWidget{
+class ItemDaLista extends StatefulWidget{
   final String label;
 
   const ItemDaLista({Key? key, required this.label}) : super(key: key);
 
   @override
+  State<ItemDaLista> createState() => _ItemDaListaState();
+}
+
+class _ItemDaListaState extends State<ItemDaLista> {
+  bool? _valor = false;
+
+  @override
   Widget build(BuildContext context){
     return Row(
       children: [
-        Checkbox(value: false, onChanged: null),
-        Text(label),
+        Checkbox(
+            onChanged: (novoValor) => setState(() => _valor = novoValor),
+            value: _valor,
+        ),
+        Text(widget.label),
       ],
     );
   }
